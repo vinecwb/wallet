@@ -20,10 +20,10 @@ public class WalletService {
     public Wallet createWallet(WalletRequestDTO walletRequestDTO) {
         Wallet wallet = new Wallet();
         wallet.setAmount(walletRequestDTO.amount());
-        wallet.setUserId(walletRequestDTO.userId());
-        wallet.setStatus(walletRequestDTO.status());
-        wallet.setCreatedAt(new Date());
-        wallet.setUpdatedAt(new Date());
+        wallet.setUser_id(walletRequestDTO.user_id());
+        wallet.setEnabled(walletRequestDTO.enabled());
+        wallet.setCreated_at(new Date());
+        wallet.setUpdated_at(new Date());
 
         return walletRepository.save(wallet);
     }

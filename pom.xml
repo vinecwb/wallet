@@ -83,7 +83,16 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>9.8.1</version>
+				<configuration>
+					<url>jdbc:postgresql://localhost:5432/walletmanager</url>
+					<user>vinicius.santos</user>
+					<password>password</password>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-
 </project>

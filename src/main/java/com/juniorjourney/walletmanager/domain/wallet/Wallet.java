@@ -1,9 +1,6 @@
 package com.juniorjourney.walletmanager.domain.wallet;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,9 +20,12 @@ public class Wallet {
     @GeneratedValue
     private UUID id;
     private int amount;
-    private UUID userId;
-    private boolean status;
-    private Date createdAt;
-    private Date updatedAt;
+    private UUID user_id;
+    private boolean enabled;
+
+
+    private Date created_at;
+
+    private Date updated_at;
 
 }
