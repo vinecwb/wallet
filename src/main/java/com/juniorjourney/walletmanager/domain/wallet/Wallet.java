@@ -24,7 +24,7 @@ public class Wallet {
     private UUID id;
     private int amount;
     private UUID userId;
-    private String status;
+    private boolean status;
     private Date createdAt;
     private Date updatedAt;
 

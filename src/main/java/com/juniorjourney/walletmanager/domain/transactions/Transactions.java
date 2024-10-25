@@ -1,4 +1,4 @@
-package com.juniorjourney.walletmanager.domain.transaction;
+package com.juniorjourney.walletmanager.domain.transactions;
 
 import com.juniorjourney.walletmanager.domain.wallet.Wallet;
 import jakarta.persistence.*;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Transaction {
+public class Transactions {
     @Id
     @GeneratedValue
     private UUID id;
