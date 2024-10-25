@@ -22,8 +22,8 @@ public class WalletService {
         wallet.setAmount(walletRequestDTO.amount());
         wallet.setUser_id(walletRequestDTO.user_id());
         wallet.setEnabled(walletRequestDTO.enabled());
-        wallet.setCreated_at(new Date());
-        wallet.setUpdated_at(new Date());
+        wallet.setCreatedAt(new Date());
+        wallet.setUpdatedAt(new Date());
 
         return walletRepository.save(wallet);
     }

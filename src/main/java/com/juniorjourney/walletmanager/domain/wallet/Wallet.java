@@ -23,9 +23,9 @@ public class Wallet {
     private UUID user_id;
     private boolean enabled;
 
-
-    private Date created_at;
-
-    private Date updated_at;
+    @Column(name = "created_at" )
+    private Date createdAt;
+    @Column(name = "updated_at" )
+    private Date updatedAt;
 
 }

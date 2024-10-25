@@ -23,6 +23,7 @@ public class Transactions {
     private int amount;
     private String action;
     private String source;
+    @Column(name = "created_at" )
     private Date createdAt;
 
     @ManyToOne
