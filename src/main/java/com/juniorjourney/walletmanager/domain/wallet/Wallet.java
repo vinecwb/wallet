@@ -20,7 +20,8 @@ public class Wallet {
     @GeneratedValue
     private UUID id;
     private int amount;
-    private UUID user_id;
+    @Column(name = "user_id", nullable = false)
+    private UUID userId;
     private boolean enabled;
 
     @Column(name = "created_at" )
@@ -28,4 +29,14 @@ public class Wallet {
     @Column(name = "updated_at" )
     private Date updatedAt;
 
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = new Date();
+    }
 }

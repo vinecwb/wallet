@@ -11,8 +11,8 @@ public record WalletRequestDTO(
         UUID id,
         int amount,
         @NotNull
-        UUID user_id,
+        UUID userId,
         boolean enabled,
-        Date created_at,
-        Date updated_at) {
+        Date createdAt,
+        Date updatedAt) {
 }

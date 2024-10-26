@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class WalletService {
@@ -20,11 +22,15 @@ public class WalletService {
     public Wallet createWallet(WalletRequestDTO walletRequestDTO) {
         Wallet wallet = new Wallet();
         wallet.setAmount(walletRequestDTO.amount());
-        wallet.setUser_id(walletRequestDTO.user_id());
+        wallet.setUserId(walletRequestDTO.userId());
         wallet.setEnabled(walletRequestDTO.enabled());
         wallet.setCreatedAt(new Date());
         wallet.setUpdatedAt(new Date());
 
         return walletRepository.save(wallet);
+    }
+
+    public Optional<Wallet> getWalletById(UUID id) {
+        return walletRepository.findById(id);
     }
 }

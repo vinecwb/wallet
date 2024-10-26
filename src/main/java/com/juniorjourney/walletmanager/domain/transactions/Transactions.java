@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name = "transaction")
+@Table(name = "transactions")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,14 +21,24 @@ public class Transactions {
     @GeneratedValue
     private UUID id;
     private int amount;
-    private String action;
+    @Enumerated(EnumType.STRING)
+    private Action action;
     private String source;
     @Column(name = "created_at" )
     private Date createdAt;
 
-    @ManyToOne
-    @JoinColumn(name = "wallet_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "wallet_id", nullable = false)
     private Wallet wallet;
 
 
+    public Transactions(int amount, Action action, String source, Wallet wallet, Date createdAt) {
+        this.amount = amount;
+        this.action = action;
+        this.source = source;
+        this.wallet = wallet;
+        this.createdAt = createdAt;
+    }
 }
+
+

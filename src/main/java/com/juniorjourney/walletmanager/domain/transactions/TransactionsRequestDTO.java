@@ -8,7 +8,7 @@ import java.util.UUID;
 public record TransactionsRequestDTO(
         UUID id,
         int amount,
-        String action,
+        Action action,
         String source,
         Wallet wallet,
         Date createdAt
