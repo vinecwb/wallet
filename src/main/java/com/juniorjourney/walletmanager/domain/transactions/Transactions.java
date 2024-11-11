@@ -2,7 +2,11 @@ package com.juniorjourney.walletmanager.domain.transactions;
 
 import com.juniorjourney.walletmanager.domain.wallet.Wallet;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
 
 import java.util.Date;
 import java.util.UUID;
@@ -28,15 +32,6 @@ public class Transactions {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "wallet_id", nullable = false)
     private Wallet wallet;
-
-
-//    public Transactions(int amount, Action action, String source, Wallet wallet, Date createdAt) {
-//        this.amount = amount;
-//        this.action = action;
-//        this.source = source;
-//        this.wallet = wallet;
-//        this.createdAt = createdAt;
-//    }
 }
 
 
