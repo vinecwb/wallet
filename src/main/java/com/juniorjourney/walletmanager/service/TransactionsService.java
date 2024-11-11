@@ -47,13 +47,14 @@ public class TransactionsService {
             throw new IllegalArgumentException("user_id não pode ser nulo");
         }
 
-        Transactions transaction = new Transactions(
-                transactionsRequestDTO.amount(),
-                transactionsRequestDTO.action(),
-                transactionsRequestDTO.source(),
-                wallet,
-                transactionsRequestDTO.createdAt() != null ? transactionsRequestDTO.createdAt() : new Date()
-        );
+
+        Transactions transaction = Transactions.builder()
+                .amount(transactionsRequestDTO.amount())
+                .action(transactionsRequestDTO.action())
+                .source(transactionsRequestDTO.source())
+                .wallet(wallet)
+                .createdAt(wallet.getCreatedAt())
+                .build();
 
         return transactionsRepository.save(transaction);
     }
