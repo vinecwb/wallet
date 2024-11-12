@@ -3,6 +3,7 @@ package com.juniorjourney.walletmanager.service;
 import com.juniorjourney.walletmanager.domain.transactions.Action;
 import com.juniorjourney.walletmanager.domain.transactions.Transactions;
 import com.juniorjourney.walletmanager.domain.transactions.TransactionsRequestDTO;
+import com.juniorjourney.walletmanager.domain.transactions.TransactionsResponseDTO;
 import com.juniorjourney.walletmanager.domain.wallet.Wallet;
 
 import com.juniorjourney.walletmanager.repositories.TransactionsRepository;
@@ -25,8 +26,10 @@ public class TransactionsService {
     }
 
     @Transactional
-    public Transactions createTransaction(TransactionsRequestDTO transactionsRequestDTO) {
-        Wallet wallet = transactionsRequestDTO.wallet();
+    public TransactionsResponseDTO createTransaction(TransactionsRequestDTO transactionsRequestDTO) {
+        Wallet wallet = walletRepository.findById(transactionsRequestDTO.walletId())
+                .orElseThrow(() -> new IllegalArgumentException("Carteira não encontrada"));
+
 
         if (transactionsRequestDTO.action() == Action.INCREMENT) {
             wallet.setAmount(wallet.getAmount() + transactionsRequestDTO.amount());
@@ -38,24 +41,30 @@ public class TransactionsService {
             }
         }
 
-        if (wallet.getCreatedAt() == null) {
-            wallet.setCreatedAt(new Date());
-        }
-
         walletRepository.save(wallet);
-        if (wallet.getUserId() == null) {
-            throw new IllegalArgumentException("user_id não pode ser nulo");
-        }
 
+        if (wallet.getUserId() == null) {
+            throw new IllegalArgumentException("userId não pode ser nulo");
+        }
 
         Transactions transaction = Transactions.builder()
                 .amount(transactionsRequestDTO.amount())
                 .action(transactionsRequestDTO.action())
                 .source(transactionsRequestDTO.source())
                 .wallet(wallet)
-                .createdAt(wallet.getCreatedAt())
+                .createdAt(new Date())
                 .build();
 
-        return transactionsRepository.save(transaction);
+        Transactions savedTransaction = transactionsRepository.save(transaction);
+
+
+        return new TransactionsResponseDTO(
+                savedTransaction.getId(),
+                savedTransaction.getAmount(),
+                savedTransaction.getAction(),
+                savedTransaction.getSource(),
+                savedTransaction.getWallet().getId(),
+                savedTransaction.getCreatedAt()
+        );
     }
 }
