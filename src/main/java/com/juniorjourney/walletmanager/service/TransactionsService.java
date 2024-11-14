@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
-
 @Service
 public class TransactionsService {
 
@@ -29,7 +28,6 @@ public class TransactionsService {
     public TransactionsResponseDTO createTransaction(TransactionsRequestDTO transactionsRequestDTO) {
         Wallet wallet = walletRepository.findById(transactionsRequestDTO.walletId())
                 .orElseThrow(() -> new IllegalArgumentException("Carteira não encontrada"));
-
 
         if (transactionsRequestDTO.action() == Action.INCREMENT) {
             wallet.setAmount(wallet.getAmount() + transactionsRequestDTO.amount());
@@ -47,13 +45,13 @@ public class TransactionsService {
             throw new IllegalArgumentException("userId não pode ser nulo");
         }
 
-        Transactions transaction = Transactions.builder()
-                .amount(transactionsRequestDTO.amount())
-                .action(transactionsRequestDTO.action())
-                .source(transactionsRequestDTO.source())
-                .wallet(wallet)
-                .createdAt(new Date())
-                .build();
+        Transactions transaction = new Transactions();
+        transaction.setAmount(transactionsRequestDTO.amount());
+        transaction.setAction(transactionsRequestDTO.action());
+        transaction.setSource(transactionsRequestDTO.source());
+        transaction.setWallet(wallet);
+        transaction.setCreatedAt(new Date());
+
 
         Transactions savedTransaction = transactionsRepository.save(transaction);
 
